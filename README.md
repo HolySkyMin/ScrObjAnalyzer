@@ -3,9 +3,7 @@ Analyzes fumen-sobj file which is derived from scrobj file of MLTD.
 
 Written things under are the code rule.
 
-==============================================
-
-Track
+## Track
 
 -1			(block data)
 0			(null)
@@ -18,9 +16,7 @@ Track
 25, 26, 27, 28, 29, 30	6MIX
 31, 32, 33, 34, 35, 36	MillionMix
 
-==============================================
-
-Type
+## Type
 
 0	Small tap note
 1	Large tap note
@@ -32,25 +28,17 @@ Type
 
 There is no Large slide note.
 
-==============================================
-
-StartPos
+## StartPos
 
 ranges from -1 to n in nMix mode.
 
-==============================================
-
-EndPos
+## EndPos
 
 ranges from 0 to n-1 in nMix mode.
 
-==============================================
-
-Specific explanation
+## Specific explanation
 
 Note whose type is 5, 6 or 7 has information of their 'tail' notes also.
 
 5, 6	EndType is their tail note's type.
 7	(Not implemented) there is an array of the information for tail notes.
-
-==============================================
