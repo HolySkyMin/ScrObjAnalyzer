@@ -39,5 +39,5 @@ ranges from 0 to n-1 in nMix mode.
 
 Note whose type is 5, 6 or 7 has information of their 'tail' notes also.
 
-    5, 6    EndType is their tail note's type.
-    7       (Not implemented) there is an array of the information for tail notes.
+    5, 7    EndType is their tail note's type.
+    6       (Not implemented) there is an array of the information for tail notes.
