@@ -14,7 +14,8 @@ namespace ScrObjAnalyzer
     public partial class Form1 : Form
     {
         public string OriginText;
-        public List<ListData> ListDatas = new List<ListData>();
+        public List<ListData> ListDatas = new List<ListData>(), CurrentDatas = new List<ListData>();
+        private double SecPerTic;
 
         public Form1()
         {
@@ -46,7 +47,7 @@ namespace ScrObjAnalyzer
             for (int i = 0; i < target.Length; i++)
             {
                 string[] data = target[i].Split(parseTool, StringSplitOptions.RemoveEmptyEntries);
-                if (data.Length > 0 && data[0].Equals("\t\tEventNoteData") && i > 9)
+                if (data.Length > 0 && (data[0].Equals("\t\tEventNoteData") || data[0].Equals("\t\tEventConductorData")) && i > 9)
                 {
                     ListDatas.Add(new ListData());
                     totalCount++;
@@ -62,6 +63,7 @@ namespace ScrObjAnalyzer
                     else if (val >= 9 && val <= 12) { mixVal = 110; }
                     else if (val >= 25 && val <= 30) { mixVal = 120; }
                     else if (val >= 31 && val <= 36) { mixVal = 121; }
+                    ListDatas[totalCount].MyMix = mixVal;
                     if (!trackDic.ContainsKey(mixVal)) { trackDic.Add(mixVal, 0); }
                     trackDic[mixVal]++;
                     ListDatas[totalCount].ID = trackDic[mixVal];
@@ -75,6 +77,8 @@ namespace ScrObjAnalyzer
                 {
                     int val = int.Parse(data[3]);
                     ListDatas[totalCount].Type = val;
+
+                    if (val.Equals(5) || val.Equals(7)) { trackDic[ListDatas[totalCount].MyMix]++; }
                 }
                 else if (data.Length > 2 && data[1].Equals("startPosx"))
                 {
@@ -91,10 +95,32 @@ namespace ScrObjAnalyzer
                     double val = double.Parse(data[3]);
                     ListDatas[totalCount].Speed = val;
                 }
+                else if(data.Length > 2 && data[1].Equals("duration"))
+                {
+                    int val = int.Parse(data[3]);
+                    ListDatas[totalCount].TickDistance = val;
+                }
                 else if (data.Length > 2 && data[1].Equals("endType"))
                 {
                     int val = int.Parse(data[3]);
                     ListDatas[totalCount].EndType = val;
+                }
+                else if(data.Length > 2 && data[1].Equals("subtick"))
+                {
+                    int val = int.Parse(data[3]);
+                    ListDatas[totalCount].SubTick.Add(val);
+
+                    if(ListDatas[totalCount].SubTick.Count > 1) { trackDic[ListDatas[totalCount].MyMix]++; }
+                }
+                else if (data.Length > 2 && data[1].Equals("posx"))
+                {
+                    double val = double.Parse(data[3]);
+                    ListDatas[totalCount].SubPos.Add(val);
+                }
+                else if(data.Length > 2 && data[1].Equals("tempo"))
+                {
+                    double val = double.Parse(data[3]);
+                    SecPerTic = (60 / val) / 480;
                 }
             }
 
@@ -103,33 +129,33 @@ namespace ScrObjAnalyzer
 
         private void FilterBtn_Click(object sender, EventArgs e)
         {
-            List<ListData> NewData = new List<ListData>();
+            CurrentDatas.Clear();
 
             for(int i = 0; i < ListDatas.Count; i++)
             {
                 if(Mix2.Checked)
                 {
-                    if(ListDatas[i].Track >= 1 && ListDatas[i].Track <= 2) { NewData.Add(ListDatas[i]); }
+                    if(ListDatas[i].Track >= 1 && ListDatas[i].Track <= 2) { CurrentDatas.Add(ListDatas[i]); }
                 }
                 else if(Mix2P.Checked)
                 {
-                    if (ListDatas[i].Track >= 3 && ListDatas[i].Track <= 4) { NewData.Add(ListDatas[i]); }
+                    if (ListDatas[i].Track >= 3 && ListDatas[i].Track <= 4) { CurrentDatas.Add(ListDatas[i]); }
                 }
                 else if(Mix4.Checked)
                 {
-                    if (ListDatas[i].Track >= 9 && ListDatas[i].Track <= 12) { NewData.Add(ListDatas[i]); }
+                    if (ListDatas[i].Track >= 9 && ListDatas[i].Track <= 12) { CurrentDatas.Add(ListDatas[i]); }
                 }
                 else if(Mix6.Checked)
                 {
-                    if (ListDatas[i].Track >= 25 && ListDatas[i].Track <= 30) { NewData.Add(ListDatas[i]); }
+                    if (ListDatas[i].Track >= 25 && ListDatas[i].Track <= 30) { CurrentDatas.Add(ListDatas[i]); }
                 }
                 else if(MixM.Checked)
                 {
-                    if (ListDatas[i].Track >= 31 && ListDatas[i].Track <= 36) { NewData.Add(ListDatas[i]); }
+                    if (ListDatas[i].Track >= 31 && ListDatas[i].Track <= 36) { CurrentDatas.Add(ListDatas[i]); }
                 }
             }
 
-            AddToList(NewData);
+            AddToList(CurrentDatas);
         }
 
         private void AddToList(List<ListData> datas)
@@ -150,6 +176,11 @@ namespace ScrObjAnalyzer
             }
         }
 
+        private void ReshowBtn_Click(object sender, EventArgs e)
+        {
+            AddToList(ListDatas);
+        }
+
         private void Form1_Load(object sender, EventArgs e)
         {
             OriginText = Text;
@@ -159,12 +190,22 @@ namespace ScrObjAnalyzer
     public class ListData
     {
         public int ID { get; set; }
+        public int MyMix { get; set; }
         public int Track { get; set; }
         public int Type { get; set; }
         public double Time { get; set; }
         public double StartPos { get; set; }
         public double EndPos { get; set; }
         public double Speed { get; set; }
+        public int TickDistance { get; set; }
         public int EndType { get; set; }
+        public List<double> SubPos { get; set; }
+        public List<int> SubTick { get; set; }
+
+        public ListData()
+        {
+            SubPos = new List<double>();
+            SubTick = new List<int>();
+        }
     }
 }

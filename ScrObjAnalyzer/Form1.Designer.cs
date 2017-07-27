@@ -46,6 +46,8 @@
             this.Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EndType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.OpenDialog = new System.Windows.Forms.OpenFileDialog();
+            this.ReshowBtn = new System.Windows.Forms.Button();
+            this.ExportBtn = new System.Windows.Forms.Button();
             this.ModePanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,9 +60,11 @@
             this.ModePanel.Controls.Add(this.Mix4);
             this.ModePanel.Controls.Add(this.MixM);
             this.ModePanel.Controls.Add(this.Mix6);
-            this.ModePanel.Location = new System.Drawing.Point(645, 64);
+            this.ModePanel.Location = new System.Drawing.Point(736, 150);
+            this.ModePanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ModePanel.Name = "ModePanel";
-            this.ModePanel.Size = new System.Drawing.Size(234, 182);
+            this.ModePanel.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ModePanel.Size = new System.Drawing.Size(270, 236);
             this.ModePanel.TabIndex = 1;
             this.ModePanel.TabStop = false;
             this.ModePanel.Text = "Game Mode";
@@ -69,9 +73,10 @@
             // 
             this.FilterBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.FilterBtn.Location = new System.Drawing.Point(6, 130);
+            this.FilterBtn.Location = new System.Drawing.Point(6, 170);
+            this.FilterBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.FilterBtn.Name = "FilterBtn";
-            this.FilterBtn.Size = new System.Drawing.Size(222, 46);
+            this.FilterBtn.Size = new System.Drawing.Size(258, 58);
             this.FilterBtn.TabIndex = 4;
             this.FilterBtn.Text = "Reload";
             this.FilterBtn.UseVisualStyleBackColor = true;
@@ -80,9 +85,10 @@
             // Mix2P
             // 
             this.Mix2P.AutoSize = true;
-            this.Mix2P.Location = new System.Drawing.Point(6, 42);
+            this.Mix2P.Location = new System.Drawing.Point(7, 52);
+            this.Mix2P.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Mix2P.Name = "Mix2P";
-            this.Mix2P.Size = new System.Drawing.Size(92, 16);
+            this.Mix2P.Size = new System.Drawing.Size(113, 19);
             this.Mix2P.TabIndex = 3;
             this.Mix2P.TabStop = true;
             this.Mix2P.Text = "2Mix+ [3, 4]";
@@ -91,9 +97,10 @@
             // Mix2
             // 
             this.Mix2.AutoSize = true;
-            this.Mix2.Location = new System.Drawing.Point(6, 20);
+            this.Mix2.Location = new System.Drawing.Point(7, 25);
+            this.Mix2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Mix2.Name = "Mix2";
-            this.Mix2.Size = new System.Drawing.Size(86, 16);
+            this.Mix2.Size = new System.Drawing.Size(105, 19);
             this.Mix2.TabIndex = 2;
             this.Mix2.TabStop = true;
             this.Mix2.Text = "2Mix [1, 2]";
@@ -102,9 +109,10 @@
             // Mix4
             // 
             this.Mix4.AutoSize = true;
-            this.Mix4.Location = new System.Drawing.Point(6, 64);
+            this.Mix4.Location = new System.Drawing.Point(7, 80);
+            this.Mix4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Mix4.Name = "Mix4";
-            this.Mix4.Size = new System.Drawing.Size(132, 16);
+            this.Mix4.Size = new System.Drawing.Size(165, 19);
             this.Mix4.TabIndex = 2;
             this.Mix4.TabStop = true;
             this.Mix4.Text = "4Mix [9, 10, 11, 12]";
@@ -113,9 +121,10 @@
             // MixM
             // 
             this.MixM.AutoSize = true;
-            this.MixM.Location = new System.Drawing.Point(6, 108);
+            this.MixM.Location = new System.Drawing.Point(7, 135);
+            this.MixM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MixM.Name = "MixM";
-            this.MixM.Size = new System.Drawing.Size(213, 16);
+            this.MixM.Size = new System.Drawing.Size(263, 19);
             this.MixM.TabIndex = 1;
             this.MixM.TabStop = true;
             this.MixM.Text = "Million Mix [31, 32, 33, 34, 35, 36]";
@@ -124,9 +133,10 @@
             // Mix6
             // 
             this.Mix6.AutoSize = true;
-            this.Mix6.Location = new System.Drawing.Point(6, 86);
+            this.Mix6.Location = new System.Drawing.Point(7, 108);
+            this.Mix6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Mix6.Name = "Mix6";
-            this.Mix6.Size = new System.Drawing.Size(178, 16);
+            this.Mix6.Size = new System.Drawing.Size(225, 19);
             this.Mix6.TabIndex = 0;
             this.Mix6.TabStop = true;
             this.Mix6.Text = "6Mix [25, 26, 27, 28, 29, 30]";
@@ -135,9 +145,10 @@
             // LoadBtn
             // 
             this.LoadBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoadBtn.Location = new System.Drawing.Point(645, 12);
+            this.LoadBtn.Location = new System.Drawing.Point(736, 15);
+            this.LoadBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.LoadBtn.Name = "LoadBtn";
-            this.LoadBtn.Size = new System.Drawing.Size(234, 46);
+            this.LoadBtn.Size = new System.Drawing.Size(270, 58);
             this.LoadBtn.TabIndex = 5;
             this.LoadBtn.Text = "Load file";
             this.LoadBtn.UseVisualStyleBackColor = true;
@@ -158,10 +169,11 @@
             this.Speed,
             this.EndType});
             this.TextList.GridLines = true;
-            this.TextList.Location = new System.Drawing.Point(12, 12);
+            this.TextList.Location = new System.Drawing.Point(14, 15);
+            this.TextList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.TextList.MultiSelect = false;
             this.TextList.Name = "TextList";
-            this.TextList.Size = new System.Drawing.Size(627, 233);
+            this.TextList.Size = new System.Drawing.Size(716, 436);
             this.TextList.TabIndex = 6;
             this.TextList.UseCompatibleStateImageBehavior = false;
             this.TextList.View = System.Windows.Forms.View.Details;
@@ -219,17 +231,43 @@
             this.OpenDialog.FileName = "*";
             this.OpenDialog.Filter = "Text file (*.txt)|*.txt|All file|*.*";
             // 
+            // ReshowBtn
+            // 
+            this.ReshowBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ReshowBtn.Location = new System.Drawing.Point(736, 81);
+            this.ReshowBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ReshowBtn.Name = "ReshowBtn";
+            this.ReshowBtn.Size = new System.Drawing.Size(270, 58);
+            this.ReshowBtn.TabIndex = 5;
+            this.ReshowBtn.Text = "Reshow all";
+            this.ReshowBtn.UseVisualStyleBackColor = true;
+            this.ReshowBtn.Click += new System.EventHandler(this.ReshowBtn_Click);
+            // 
+            // ExportBtn
+            // 
+            this.ExportBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ExportBtn.Location = new System.Drawing.Point(736, 393);
+            this.ExportBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ExportBtn.Name = "ExportBtn";
+            this.ExportBtn.Size = new System.Drawing.Size(270, 58);
+            this.ExportBtn.TabIndex = 7;
+            this.ExportBtn.Text = "Export as TWx";
+            this.ExportBtn.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(891, 257);
+            this.ClientSize = new System.Drawing.Size(1018, 467);
+            this.Controls.Add(this.ExportBtn);
+            this.Controls.Add(this.ReshowBtn);
             this.Controls.Add(this.TextList);
             this.Controls.Add(this.LoadBtn);
             this.Controls.Add(this.ModePanel);
-            this.MinimumSize = new System.Drawing.Size(907, 296);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MinimumSize = new System.Drawing.Size(1036, 514);
             this.Name = "Form1";
-            this.Text = "ScrObjAnalyzer 1.0";
+            this.Text = "ScrObjAnalyzer 1.0.1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ModePanel.ResumeLayout(false);
             this.ModePanel.PerformLayout();
@@ -256,6 +294,8 @@
         private System.Windows.Forms.ColumnHeader EndType;
         private System.Windows.Forms.ColumnHeader ID;
         private System.Windows.Forms.OpenFileDialog OpenDialog;
+        private System.Windows.Forms.Button ReshowBtn;
+        private System.Windows.Forms.Button ExportBtn;
     }
 }
 
