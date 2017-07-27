@@ -48,6 +48,7 @@
             this.OpenDialog = new System.Windows.Forms.OpenFileDialog();
             this.ReshowBtn = new System.Windows.Forms.Button();
             this.ExportBtn = new System.Windows.Forms.Button();
+            this.ExportDialog = new System.Windows.Forms.SaveFileDialog();
             this.ModePanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,7 +91,6 @@
             this.Mix2P.Name = "Mix2P";
             this.Mix2P.Size = new System.Drawing.Size(113, 19);
             this.Mix2P.TabIndex = 3;
-            this.Mix2P.TabStop = true;
             this.Mix2P.Text = "2Mix+ [3, 4]";
             this.Mix2P.UseVisualStyleBackColor = true;
             // 
@@ -102,7 +102,6 @@
             this.Mix2.Name = "Mix2";
             this.Mix2.Size = new System.Drawing.Size(105, 19);
             this.Mix2.TabIndex = 2;
-            this.Mix2.TabStop = true;
             this.Mix2.Text = "2Mix [1, 2]";
             this.Mix2.UseVisualStyleBackColor = true;
             // 
@@ -114,13 +113,13 @@
             this.Mix4.Name = "Mix4";
             this.Mix4.Size = new System.Drawing.Size(165, 19);
             this.Mix4.TabIndex = 2;
-            this.Mix4.TabStop = true;
             this.Mix4.Text = "4Mix [9, 10, 11, 12]";
             this.Mix4.UseVisualStyleBackColor = true;
             // 
             // MixM
             // 
             this.MixM.AutoSize = true;
+            this.MixM.Checked = true;
             this.MixM.Location = new System.Drawing.Point(7, 135);
             this.MixM.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MixM.Name = "MixM";
@@ -138,7 +137,6 @@
             this.Mix6.Name = "Mix6";
             this.Mix6.Size = new System.Drawing.Size(225, 19);
             this.Mix6.TabIndex = 0;
-            this.Mix6.TabStop = true;
             this.Mix6.Text = "6Mix [25, 26, 27, 28, 29, 30]";
             this.Mix6.UseVisualStyleBackColor = true;
             // 
@@ -253,6 +251,11 @@
             this.ExportBtn.TabIndex = 7;
             this.ExportBtn.Text = "Export as TWx";
             this.ExportBtn.UseVisualStyleBackColor = true;
+            this.ExportBtn.Click += new System.EventHandler(this.ExportBtn_Click);
+            // 
+            // ExportDialog
+            // 
+            this.ExportDialog.FileName = "New Beatmap";
             // 
             // Form1
             // 
@@ -267,7 +270,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimumSize = new System.Drawing.Size(1036, 514);
             this.Name = "Form1";
-            this.Text = "ScrObjAnalyzer 1.0.1";
+            this.Text = "ScrObjAnalyzer 1.1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ModePanel.ResumeLayout(false);
             this.ModePanel.PerformLayout();
@@ -296,6 +299,7 @@
         private System.Windows.Forms.OpenFileDialog OpenDialog;
         private System.Windows.Forms.Button ReshowBtn;
         private System.Windows.Forms.Button ExportBtn;
+        private System.Windows.Forms.SaveFileDialog ExportDialog;
     }
 }
 

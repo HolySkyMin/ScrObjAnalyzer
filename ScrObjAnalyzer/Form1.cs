@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
@@ -34,6 +28,7 @@ namespace ScrObjAnalyzer
                 {
                     strList.Add(reader.ReadLine());
                 }
+                reader.Close();
                 ReadFumenFile(strList.ToArray());
             }
         }
@@ -179,6 +174,40 @@ namespace ScrObjAnalyzer
         private void ReshowBtn_Click(object sender, EventArgs e)
         {
             AddToList(ListDatas);
+        }
+
+        private void ExportBtn_Click(object sender, EventArgs e)
+        {
+            int curParseMode = 0;
+            if (Mix2.Checked || Mix2P.Checked)
+            {
+                ExportDialog.DefaultExt = "tw2";
+                ExportDialog.Filter = "2Lane TWx Beatmap format (*.tw2)|*.tw2";
+                curParseMode = 2;
+            }
+            else if (Mix4.Checked)
+            {
+                ExportDialog.DefaultExt = "tw4";
+                ExportDialog.Filter = "4Lane TWx Beatmap format (*.tw4)|*.tw4";
+                curParseMode = 4;
+            }
+            else if (Mix6.Checked || MixM.Checked)
+            {
+                ExportDialog.DefaultExt = "tw6";
+                ExportDialog.Filter = "6Lane TWx Beatmap format (*.tw6)|*.tw6";
+                curParseMode = 6;
+            }
+
+            DialogResult res = ExportDialog.ShowDialog();
+            if(res.Equals(DialogResult.OK))
+            {
+                DataParser parser = new DataParser(SecPerTic);
+                string jsonText = parser.ParseToTWx(curParseMode, CurrentDatas);
+
+                StreamWriter writer = new StreamWriter(ExportDialog.OpenFile());
+                writer.Write(jsonText);
+                writer.Close();
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
