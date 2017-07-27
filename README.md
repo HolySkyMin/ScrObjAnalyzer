@@ -29,7 +29,7 @@ There is no Large slide note.
 
 ## StartPos
 
-ranges from -1 to n in nMix mode.
+ranges from -1 to 2 in 2Mix/2Mix+ mode, -2 to 5 in 4Mix mode, and -2 to 7 in 6Mix/Million Mix mode.
 
 ## EndPos
 
