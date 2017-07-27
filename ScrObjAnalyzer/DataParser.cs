@@ -82,7 +82,7 @@ namespace ScrObjAnalyzer
                 double start = ConvertStartPos(twxMode, data[i].StartPos);
 
                 Note note = new Note();
-                note.CreateNote(data[i].ID, size, new byte[] { 255, 255, 255, 255 }, mode, flick, data[i].Time, data[i].Speed, start, data[i].EndPos + 1, new int[] { 0 });
+                note.CreateNote(data[i].ID, size, new byte[] { 255, 255, 255, 255 }, mode, flick, data[i].Time, data[i].Speed, start, data[i].EndPos + 1.0, new int[] { 0 });
                 NoteList.Add(note);
                 if (data[i].Type.Equals(5) || data[i].Type.Equals(7))
                 {
@@ -128,13 +128,17 @@ namespace ScrObjAnalyzer
 
             if (twxMode.Equals(2))
             {
+                /*
                 if (value.Equals(-1)) { start = 0.666666; }
                 else if (value.Equals(0)) { start = 1.222222; }
                 else if (value.Equals(1)) { start = 1.777777; }
                 else if (value.Equals(2)) { start = 2.333333; }
+                */
+                start = (11.0 / 9.0) + ((5.0 / 9.0) * value);
             }
             else if (twxMode.Equals(4))
             {
+                /*
                 if (value.Equals(-2)) { start = 0.555555; }
                 else if (value.Equals(-1)) { start = 1.111111; }
                 else if (value.Equals(0)) { start = 1.666666; }
@@ -143,9 +147,12 @@ namespace ScrObjAnalyzer
                 else if (value.Equals(3)) { start = 3.333333; }
                 else if (value.Equals(4)) { start = 3.888888; }
                 else if (value.Equals(5)) { start = 4.444444; }
+                */
+                start = (15.0 / 9.0) + ((5.0 / 9.0) * value);
             }
             else if (twxMode.Equals(6))
             {
+                /*
                 if (value.Equals(-2)) { start = 1.0; }
                 else if (value.Equals(-1)) { start = 1.555555; }
                 else if (value.Equals(0)) { start = 2.111111; }
@@ -156,6 +163,8 @@ namespace ScrObjAnalyzer
                 else if (value.Equals(5)) { start = 4.888888; }
                 else if (value.Equals(6)) { start = 5.444444; }
                 else if (value.Equals(7)) { start = 6.0; }
+                */
+                start = (19.0 / 9.0) + ((5.0 / 9.0) * value);
             }
 
             return start;
