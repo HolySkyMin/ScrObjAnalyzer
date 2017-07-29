@@ -1,7 +1,7 @@
 # ScrObjAnalyzer
 Analyzes fumen-sobj file which is derived from scrobj file of MLTD.
 
-This program is not perfect still. I'm trying hard but there is possibilities of erroneous exporting.
+This program is not perfect still. I'm trying hard but there are possibilities of erroneous exporting.
 
 ## Features
 
