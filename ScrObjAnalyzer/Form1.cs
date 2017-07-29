@@ -10,10 +10,10 @@ namespace ScrObjAnalyzer
         public string OriginText;
         public List<ListData> ListDatas = new List<ListData>(), CurrentDatas = new List<ListData>();
         public List<BPMData> BPMs = new List<BPMData>();
-        private double SecPerTic;
 
         public Form1()
         {
+            OriginText = Text;
             InitializeComponent();
         }
 
@@ -22,7 +22,7 @@ namespace ScrObjAnalyzer
             DialogResult res = OpenDialog.ShowDialog();
             if(res.Equals(DialogResult.OK))
             {
-                Text = OriginText += (" - " + OpenDialog.SafeFileName);
+                Text = (OriginText + " - " + OpenDialog.SafeFileName);
                 StreamReader reader = new StreamReader(OpenDialog.OpenFile());
                 List<string> strList = new List<string>();
                 while(reader.Peek() != -1)
@@ -41,6 +41,8 @@ namespace ScrObjAnalyzer
             Dictionary<int, int> trackDic = new Dictionary<int, int>();
             int totalCount = -1, bpmDataCount = -1;
 
+            ListDatas.Clear();
+            BPMs.Clear();
             for (int i = 0; i < target.Length; i++)
             {
                 string[] data = target[i].Split(parseTool, StringSplitOptions.RemoveEmptyEntries);
@@ -186,6 +188,11 @@ namespace ScrObjAnalyzer
             ExportBtn.Enabled = false;
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            OriginText = Text;
+        }
+
         private void ExportBtn_Click(object sender, EventArgs e)
         {
             int curParseMode = 0;
@@ -220,11 +227,6 @@ namespace ScrObjAnalyzer
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            OriginText = Text;
-            ExportBtn.Enabled = false;
-        }
     }
 
     public class ListData
