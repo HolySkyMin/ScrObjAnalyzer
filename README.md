@@ -19,7 +19,7 @@ In 1.1.1:
 ### Track
 
     -1                        (block data)  
-    0                         (null)  
+    0                         (conductor data)  
     1, 2                      2Mix  
     3, 4                      2Mix+  
     9, 10, 11, 12             4Mix  
