@@ -57,17 +57,20 @@ namespace ScrObjAnalyzer
     {
         public double SecPerTick { get; set; }
 
-        public DataParser(double spc)
+        public DataParser()
         {
-            SecPerTick = spc;
+            
         }
 
-        public string ParseToTWx(int twxMode, List<ListData> data)
+        public string ParseToTWx(int twxMode, List<ListData> data, List<BPMData> bpm)
         {
             List<Note> NoteList = new List<Note>();
+            int bpmIndex = -1;
 
             for(int i = 0; i < data.Count; i++)
             {
+                while (bpmIndex < bpm.Count - 1 && data[i].Time >= bpm[bpmIndex + 1].Time) { bpmIndex++; }
+
                 int mode = 0, size = 0, flick = 0;
                 if (data[i].Type.Equals(0)) { mode = 0; size = 0; flick = 0; }
                 else if (data[i].Type.Equals(1)) { mode = 0; size = 1; flick = 0; }
@@ -92,7 +95,7 @@ namespace ScrObjAnalyzer
                     else if (data[i].EndType.Equals(2)) { newflick = 3; }
                     else if (data[i].EndType.Equals(3)) { newflick = 2; }
                     Note tail = new Note();
-                    tail.CreateNote(data[i].ID + 1, size, new byte[] { 255, 255, 255, 255 }, mode, newflick, data[i].Time + (data[i].TickDistance * SecPerTick), data[i].Speed, start, data[i].EndPos + 1, new int[] { data[i].ID });
+                    tail.CreateNote(data[i].ID + 1, size, new byte[] { 255, 255, 255, 255 }, mode, newflick, data[i].Time + (data[i].TickDistance * bpm[bpmIndex].SecPerTick), data[i].Speed, start, data[i].EndPos + 1, new int[] { data[i].ID });
                     NoteList.Add(tail);
                 }
                 else if (data[i].Type.Equals(6))
@@ -100,7 +103,7 @@ namespace ScrObjAnalyzer
                     for (int j = 1; j < data[i].SubPos.Count; j++)
                     {
                         Note sub = new Note();
-                        sub.CreateNote(data[i].ID + j, size, new byte[] { 255, 255, 255, 255 }, mode, 0, data[i].Time + (data[i].SubTick[j] * SecPerTick), data[i].Speed, ConvertStartPos(twxMode, data[i].SubPos[j]), data[i].SubPos[j] + 1, new int[] { data[i].ID + j - 1 });
+                        sub.CreateNote(data[i].ID + j, size, new byte[] { 255, 255, 255, 255 }, mode, 0, data[i].Time + (data[i].SubTick[j] * bpm[bpmIndex].SecPerTick), data[i].Speed, ConvertStartPos(twxMode, data[i].SubPos[j]), data[i].SubPos[j] + 1, new int[] { data[i].ID + j - 1 });
                         if (j.Equals(data[i].SubPos.Count - 1))
                         {
                             int newflick = 0;

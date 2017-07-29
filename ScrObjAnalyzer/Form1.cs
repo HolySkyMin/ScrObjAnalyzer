@@ -9,6 +9,7 @@ namespace ScrObjAnalyzer
     {
         public string OriginText;
         public List<ListData> ListDatas = new List<ListData>(), CurrentDatas = new List<ListData>();
+        public List<BPMData> BPMs = new List<BPMData>();
         private double SecPerTic;
 
         public Form1()
@@ -31,13 +32,14 @@ namespace ScrObjAnalyzer
                 reader.Close();
                 ReadFumenFile(strList.ToArray());
             }
+            ExportBtn.Enabled = false;
         }
 
         private void ReadFumenFile(string[] target)
         {
             char[] parseTool = new char[] { ' ' };
             Dictionary<int, int> trackDic = new Dictionary<int, int>();
-            int totalCount = -1;
+            int totalCount = -1, bpmDataCount = -1;
 
             for (int i = 0; i < target.Length; i++)
             {
@@ -46,6 +48,11 @@ namespace ScrObjAnalyzer
                 {
                     ListDatas.Add(new ListData());
                     totalCount++;
+                    if(data[0].Equals("\t\tEventConductorData"))
+                    {
+                        BPMs.Add(new BPMData());
+                        bpmDataCount++;
+                    }
                 }
                 else if (data.Length > 2 && data[1].Equals("track"))
                 {
@@ -67,6 +74,7 @@ namespace ScrObjAnalyzer
                 {
                     double val = double.Parse(data[3]);
                     ListDatas[totalCount].Time = val;
+                    if(bpmDataCount >= 0) { BPMs[bpmDataCount].Time = val; }
                 }
                 else if (data.Length > 2 && data[1].Equals("type"))
                 {
@@ -115,7 +123,7 @@ namespace ScrObjAnalyzer
                 else if(data.Length > 2 && data[1].Equals("tempo"))
                 {
                     double val = double.Parse(data[3]);
-                    SecPerTic = (60 / val) / 480;
+                    BPMs[bpmDataCount].SecPerTick = (60 / val) / 480;
                 }
             }
 
@@ -151,6 +159,7 @@ namespace ScrObjAnalyzer
             }
 
             AddToList(CurrentDatas);
+            ExportBtn.Enabled = true;
         }
 
         private void AddToList(List<ListData> datas)
@@ -174,6 +183,7 @@ namespace ScrObjAnalyzer
         private void ReshowBtn_Click(object sender, EventArgs e)
         {
             AddToList(ListDatas);
+            ExportBtn.Enabled = false;
         }
 
         private void ExportBtn_Click(object sender, EventArgs e)
@@ -201,8 +211,8 @@ namespace ScrObjAnalyzer
             DialogResult res = ExportDialog.ShowDialog();
             if(res.Equals(DialogResult.OK))
             {
-                DataParser parser = new DataParser(SecPerTic);
-                string jsonText = parser.ParseToTWx(curParseMode, CurrentDatas);
+                DataParser parser = new DataParser();
+                string jsonText = parser.ParseToTWx(curParseMode, CurrentDatas, BPMs);
 
                 StreamWriter writer = new StreamWriter(ExportDialog.OpenFile());
                 writer.Write(jsonText);
@@ -213,6 +223,7 @@ namespace ScrObjAnalyzer
         private void Form1_Load(object sender, EventArgs e)
         {
             OriginText = Text;
+            ExportBtn.Enabled = false;
         }
     }
 
@@ -235,6 +246,17 @@ namespace ScrObjAnalyzer
         {
             SubPos = new List<double>();
             SubTick = new List<int>();
+        }
+    }
+
+    public class BPMData
+    {
+        public double Time { get; set; }
+        public double SecPerTick { get; set; }
+
+        public BPMData()
+        {
+
         }
     }
 }

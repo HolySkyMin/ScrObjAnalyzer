@@ -257,7 +257,7 @@
             this.Controls.Add(this.ModePanel);
             this.MinimumSize = new System.Drawing.Size(908, 419);
             this.Name = "Form1";
-            this.Text = "ScrObjAnalyzer 1.1.1";
+            this.Text = "ScrObjAnalyzer 1.1.2";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ModePanel.ResumeLayout(false);
             this.ModePanel.PerformLayout();
