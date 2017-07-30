@@ -49,7 +49,19 @@
             this.ReshowBtn = new System.Windows.Forms.Button();
             this.ExportBtn = new System.Windows.Forms.Button();
             this.ExportDialog = new System.Windows.Forms.SaveFileDialog();
+            this.ExportBox = new System.Windows.Forms.GroupBox();
+            this.ExpColorBox = new System.Windows.Forms.GroupBox();
+            this.ColorA = new System.Windows.Forms.NumericUpDown();
+            this.ColorB = new System.Windows.Forms.NumericUpDown();
+            this.ColorG = new System.Windows.Forms.NumericUpDown();
+            this.ColorR = new System.Windows.Forms.NumericUpDown();
             this.ModePanel.SuspendLayout();
+            this.ExportBox.SuspendLayout();
+            this.ExpColorBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorA)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorB)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorG)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorR)).BeginInit();
             this.SuspendLayout();
             // 
             // ModePanel
@@ -61,7 +73,7 @@
             this.ModePanel.Controls.Add(this.Mix4);
             this.ModePanel.Controls.Add(this.MixM);
             this.ModePanel.Controls.Add(this.Mix6);
-            this.ModePanel.Location = new System.Drawing.Point(644, 120);
+            this.ModePanel.Location = new System.Drawing.Point(636, 120);
             this.ModePanel.Name = "ModePanel";
             this.ModePanel.Size = new System.Drawing.Size(236, 189);
             this.ModePanel.TabIndex = 1;
@@ -72,6 +84,7 @@
             // 
             this.FilterBtn.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.FilterBtn.Enabled = false;
             this.FilterBtn.Location = new System.Drawing.Point(5, 136);
             this.FilterBtn.Name = "FilterBtn";
             this.FilterBtn.Size = new System.Drawing.Size(226, 46);
@@ -135,7 +148,7 @@
             // LoadBtn
             // 
             this.LoadBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoadBtn.Location = new System.Drawing.Point(644, 12);
+            this.LoadBtn.Location = new System.Drawing.Point(636, 12);
             this.LoadBtn.Name = "LoadBtn";
             this.LoadBtn.Size = new System.Drawing.Size(236, 46);
             this.LoadBtn.TabIndex = 5;
@@ -161,7 +174,7 @@
             this.TextList.Location = new System.Drawing.Point(12, 12);
             this.TextList.MultiSelect = false;
             this.TextList.Name = "TextList";
-            this.TextList.Size = new System.Drawing.Size(627, 350);
+            this.TextList.Size = new System.Drawing.Size(618, 427);
             this.TextList.TabIndex = 6;
             this.TextList.UseCompatibleStateImageBehavior = false;
             this.TextList.View = System.Windows.Forms.View.Details;
@@ -222,7 +235,8 @@
             // ReshowBtn
             // 
             this.ReshowBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ReshowBtn.Location = new System.Drawing.Point(644, 65);
+            this.ReshowBtn.Enabled = false;
+            this.ReshowBtn.Location = new System.Drawing.Point(636, 65);
             this.ReshowBtn.Name = "ReshowBtn";
             this.ReshowBtn.Size = new System.Drawing.Size(236, 46);
             this.ReshowBtn.TabIndex = 5;
@@ -234,9 +248,9 @@
             // 
             this.ExportBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ExportBtn.Enabled = false;
-            this.ExportBtn.Location = new System.Drawing.Point(644, 314);
+            this.ExportBtn.Location = new System.Drawing.Point(6, 74);
             this.ExportBtn.Name = "ExportBtn";
-            this.ExportBtn.Size = new System.Drawing.Size(236, 46);
+            this.ExportBtn.Size = new System.Drawing.Size(224, 46);
             this.ExportBtn.TabIndex = 7;
             this.ExportBtn.Text = "Export as TWx";
             this.ExportBtn.UseVisualStyleBackColor = true;
@@ -246,22 +260,121 @@
             // 
             this.ExportDialog.FileName = "New Beatmap";
             // 
+            // ExportBox
+            // 
+            this.ExportBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.ExportBox.Controls.Add(this.ExpColorBox);
+            this.ExportBox.Controls.Add(this.ExportBtn);
+            this.ExportBox.Location = new System.Drawing.Point(636, 315);
+            this.ExportBox.Name = "ExportBox";
+            this.ExportBox.Size = new System.Drawing.Size(236, 126);
+            this.ExportBox.TabIndex = 8;
+            this.ExportBox.TabStop = false;
+            this.ExportBox.Text = "Export setting";
+            // 
+            // ExpColorBox
+            // 
+            this.ExpColorBox.Controls.Add(this.ColorA);
+            this.ExpColorBox.Controls.Add(this.ColorB);
+            this.ExpColorBox.Controls.Add(this.ColorG);
+            this.ExpColorBox.Controls.Add(this.ColorR);
+            this.ExpColorBox.Location = new System.Drawing.Point(7, 21);
+            this.ExpColorBox.Name = "ExpColorBox";
+            this.ExpColorBox.Size = new System.Drawing.Size(223, 47);
+            this.ExpColorBox.TabIndex = 8;
+            this.ExpColorBox.TabStop = false;
+            this.ExpColorBox.Text = "Color (R, G, B, A)";
+            // 
+            // ColorA
+            // 
+            this.ColorA.Location = new System.Drawing.Point(169, 20);
+            this.ColorA.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.ColorA.Name = "ColorA";
+            this.ColorA.Size = new System.Drawing.Size(48, 21);
+            this.ColorA.TabIndex = 11;
+            this.ColorA.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
+            // ColorB
+            // 
+            this.ColorB.Location = new System.Drawing.Point(115, 20);
+            this.ColorB.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.ColorB.Name = "ColorB";
+            this.ColorB.Size = new System.Drawing.Size(48, 21);
+            this.ColorB.TabIndex = 10;
+            this.ColorB.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
+            // ColorG
+            // 
+            this.ColorG.Location = new System.Drawing.Point(60, 20);
+            this.ColorG.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.ColorG.Name = "ColorG";
+            this.ColorG.Size = new System.Drawing.Size(48, 21);
+            this.ColorG.TabIndex = 9;
+            this.ColorG.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
+            // ColorR
+            // 
+            this.ColorR.Location = new System.Drawing.Point(6, 20);
+            this.ColorR.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.ColorR.Name = "ColorR";
+            this.ColorR.Size = new System.Drawing.Size(48, 21);
+            this.ColorR.TabIndex = 0;
+            this.ColorR.Value = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(892, 380);
-            this.Controls.Add(this.ExportBtn);
+            this.ClientSize = new System.Drawing.Size(884, 451);
+            this.Controls.Add(this.ExportBox);
             this.Controls.Add(this.ReshowBtn);
             this.Controls.Add(this.TextList);
             this.Controls.Add(this.LoadBtn);
             this.Controls.Add(this.ModePanel);
-            this.MinimumSize = new System.Drawing.Size(908, 419);
+            this.MinimumSize = new System.Drawing.Size(900, 490);
             this.Name = "Form1";
-            this.Text = "ScrObjAnalyzer 1.1.2";
+            this.Text = "ScrObjAnalyzer 1.2";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ModePanel.ResumeLayout(false);
             this.ModePanel.PerformLayout();
+            this.ExportBox.ResumeLayout(false);
+            this.ExpColorBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ColorA)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorB)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorG)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ColorR)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -288,6 +401,12 @@
         private System.Windows.Forms.Button ReshowBtn;
         private System.Windows.Forms.Button ExportBtn;
         private System.Windows.Forms.SaveFileDialog ExportDialog;
+        private System.Windows.Forms.GroupBox ExportBox;
+        private System.Windows.Forms.GroupBox ExpColorBox;
+        private System.Windows.Forms.NumericUpDown ColorA;
+        private System.Windows.Forms.NumericUpDown ColorB;
+        private System.Windows.Forms.NumericUpDown ColorG;
+        private System.Windows.Forms.NumericUpDown ColorR;
     }
 }
 

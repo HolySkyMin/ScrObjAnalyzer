@@ -31,8 +31,13 @@ namespace ScrObjAnalyzer
                 }
                 reader.Close();
                 ReadFumenFile(strList.ToArray());
+                if(ListDatas.Count > 0)
+                {
+                    ExportBtn.Enabled = false;
+                    ReshowBtn.Enabled = true;
+                    FilterBtn.Enabled = true;
+                }
             }
-            ExportBtn.Enabled = false;
         }
 
         private void ReadFumenFile(string[] target)
@@ -219,7 +224,7 @@ namespace ScrObjAnalyzer
             if(res.Equals(DialogResult.OK))
             {
                 DataParser parser = new DataParser();
-                string jsonText = parser.ParseToTWx(curParseMode, CurrentDatas, BPMs);
+                string jsonText = parser.ParseToTWx(curParseMode, CurrentDatas, BPMs, new byte[] { (byte)ColorR.Value, (byte)ColorG.Value, (byte)ColorB.Value, (byte)ColorA.Value });
 
                 StreamWriter writer = new StreamWriter(ExportDialog.OpenFile());
                 writer.Write(jsonText);
