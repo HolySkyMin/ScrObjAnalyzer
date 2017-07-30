@@ -9,10 +9,7 @@ This program supports exploring \*\*\*\*\*\*\_fumen\_sobj.txt (which is original
 2Mix and 2Mix+ will be exported as TW2, 4Mix will be exported as TW4, 6Mix and Million Mix will be exported as TW6.  
 (Tempest Wave will support TW2 and TW4 in their later update.)
 
-## Known problems
-
-In 1.1.1:
-* Data which contains more than 2 EventConductorData will be exported incorrectly.
+Exported beatmap is **95% same** compare to original MLTD; because there may be other system notes which control whole speed/scroll in scenario\_(...)\_sobj file.
 
 ## Data rules
 
@@ -42,13 +39,20 @@ There is no Large slide note.
 
 ### StartPos
 
-ranges from -1 to 2 in 2Mix/2Mix+ mode, -2 to 5 in 4Mix mode, and -2 to 7 in 6Mix/Million Mix mode.
+ranges from -1 to 2 in 2Mix/2Mix+ mode, -2 to 5 in 4Mix mode, and -2 to 7 in 6Mix/Million Mix mode.  
 Allows decimal number.
 
 ### EndPos
 
-ranges from 0 to n-1 in nMix mode.
+ranges from 0 to n-1 in nMix mode.  
 Allows decimal number.
+
+### EndType
+
+    0   Tap note
+    1   Left flick note
+    2   Up flick note
+    3   Right flick note
 
 ### Specific explanation
 
