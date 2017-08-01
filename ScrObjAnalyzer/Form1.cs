@@ -83,6 +83,12 @@ namespace ScrObjAnalyzer
                     ListDatas[totalCount].Time = val;
                     if(bpmDataCount >= 0) { BPMs[bpmDataCount].Time = val; }
                 }
+                else if (data.Length > 2 && data[1].Equals("tick"))
+                {
+                    int val = int.Parse(data[3]);
+                    ListDatas[totalCount].Tick = val;
+                    if (bpmDataCount >= 0) { BPMs[bpmDataCount].Tick = val; }
+                }
                 else if (data.Length > 2 && data[1].Equals("type"))
                 {
                     int val = int.Parse(data[3]);
@@ -177,6 +183,7 @@ namespace ScrObjAnalyzer
                 ListViewItem item = new ListViewItem(datas[i].ID.ToString());
                 item.SubItems.Add(datas[i].Track.ToString());
                 item.SubItems.Add(datas[i].Time.ToString());
+                item.SubItems.Add(datas[i].Tick.ToString());
                 item.SubItems.Add(datas[i].Type.ToString());
                 item.SubItems.Add(datas[i].StartPos.ToString());
                 item.SubItems.Add(datas[i].EndPos.ToString());
@@ -229,6 +236,7 @@ namespace ScrObjAnalyzer
                 StreamWriter writer = new StreamWriter(ExportDialog.OpenFile());
                 writer.Write(jsonText);
                 writer.Close();
+                MessageBox.Show("Finished exporting.", "ScrObjAnalyzer", MessageBoxButtons.OK);
             }
         }
 
@@ -240,6 +248,7 @@ namespace ScrObjAnalyzer
         public int MyMix { get; set; }
         public int Track { get; set; }
         public int Type { get; set; }
+        public int Tick { get; set; }
         public double Time { get; set; }
         public double StartPos { get; set; }
         public double EndPos { get; set; }
@@ -258,6 +267,7 @@ namespace ScrObjAnalyzer
 
     public class BPMData
     {
+        public int Tick { get; set; }
         public double Time { get; set; }
         public double SecPerTick { get; set; }
 

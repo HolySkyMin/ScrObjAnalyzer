@@ -55,6 +55,7 @@
             this.ColorB = new System.Windows.Forms.NumericUpDown();
             this.ColorG = new System.Windows.Forms.NumericUpDown();
             this.ColorR = new System.Windows.Forms.NumericUpDown();
+            this.Tick = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ModePanel.SuspendLayout();
             this.ExportBox.SuspendLayout();
             this.ExpColorBox.SuspendLayout();
@@ -165,6 +166,7 @@
             this.ID,
             this.Track,
             this.Time,
+            this.Tick,
             this.Type,
             this.StartPos,
             this.EndPos,
@@ -194,31 +196,27 @@
             // 
             this.Time.Text = "Time";
             this.Time.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Time.Width = 150;
+            this.Time.Width = 140;
             // 
             // Type
             // 
             this.Type.Text = "Type";
             this.Type.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Type.Width = 70;
             // 
             // StartPos
             // 
             this.StartPos.Text = "StartPos";
             this.StartPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.StartPos.Width = 70;
             // 
             // EndPos
             // 
             this.EndPos.Text = "EndPos";
             this.EndPos.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.EndPos.Width = 70;
             // 
             // Speed
             // 
             this.Speed.Text = "Speed";
             this.Speed.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Speed.Width = 70;
             // 
             // EndType
             // 
@@ -353,6 +351,12 @@
             0,
             0});
             // 
+            // Tick
+            // 
+            this.Tick.Text = "Tick";
+            this.Tick.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Tick.Width = 50;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -365,7 +369,7 @@
             this.Controls.Add(this.ModePanel);
             this.MinimumSize = new System.Drawing.Size(900, 490);
             this.Name = "Form1";
-            this.Text = "ScrObjAnalyzer 1.2";
+            this.Text = "ScrObjAnalyzer 1.2.1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ModePanel.ResumeLayout(false);
             this.ModePanel.PerformLayout();
@@ -407,6 +411,7 @@
         private System.Windows.Forms.NumericUpDown ColorB;
         private System.Windows.Forms.NumericUpDown ColorG;
         private System.Windows.Forms.NumericUpDown ColorR;
+        private System.Windows.Forms.ColumnHeader Tick;
     }
 }
 
