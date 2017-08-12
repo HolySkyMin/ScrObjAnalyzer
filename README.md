@@ -22,6 +22,8 @@ Exported beatmap is **95% same** compare to original MLTD; because there may be 
     9, 10, 11, 12             4Mix  
     25, 26, 27, 28, 29, 30	  6Mix  
     31, 32, 33, 34, 35, 36	  MillionMix
+    
+~~Possibility for 4Mix+++?~~
 
 ### Type
 
@@ -39,8 +41,9 @@ There is no Large slide note.
 
 ### StartPos
 
-ranges from -1 to 2 in 2Mix/2Mix+ mode, -2 to 5 in 4Mix mode, and -2 to 7 in 6Mix/Million Mix mode.  
-Allows decimal number.
+ranges from -1 to 2 in 2Mix/2Mix+ mode, -2 to 5 in 4Mix mode, and -3 to 8 in 6Mix/Million Mix mode.  
+Allows decimal number (maybe).  
+**UPDATE 170812** Start point -3 has been discovered in official 'Shooting Stars' beatmap.
 
 ### EndPos
 
@@ -59,4 +62,4 @@ Allows decimal number.
 Note whose type is 5, 6 or 7 has information of their 'tail' notes also.
 
     5, 7    EndType is their tail note's type.
-    6       (Not shown in list) there is an array of the information for tail notes.
+    6       (Not shown in the list) there is an array of the information for tail notes.
