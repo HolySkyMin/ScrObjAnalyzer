@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace TempestWave.TWx
+﻿namespace TempestWave.TWx
 {
     public class NoteData
     {
-        public string version { get; }
+        public int version { get; }
         public Note[] notes { get; set; }
 
         public NoteData()
         {
-            version = "1.0";
+            version = 1;
         }
     }
 

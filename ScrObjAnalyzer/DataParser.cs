@@ -33,7 +33,7 @@ namespace ScrObjAnalyzer
                 else if (data[i].Type.Equals(7)) { mode = 1; size = 1; flick = 0; }
                 else if (data[i].Type.Equals(8)) { mode = 0; size = 2; flick = 0; }
 
-                double start = ConvertStartPos(twxMode, data[i].StartPos);
+                double start = data[i].StartPos + 1;
 
                 Note note = new Note();
                 note.CreateNote(data[i].ID, size, color, mode, flick, data[i].Time, data[i].Tick, data[i].Speed, start, data[i].EndPos + 1.0, new int[] { 0 });
@@ -54,7 +54,7 @@ namespace ScrObjAnalyzer
                     for (int j = 1; j < data[i].SubPos.Count; j++)
                     {
                         Note sub = new Note();
-                        sub.CreateNote(data[i].ID + j, size, color, mode, 0, data[i].Time + (data[i].SubTick[j] * bpm[bpmIndex].SecPerTick), data[i].Tick + data[i].SubTick[j], data[i].Speed, ConvertStartPos(twxMode, data[i].SubPos[j]), data[i].SubPos[j] + 1, new int[] { data[i].ID + j - 1 });
+                        sub.CreateNote(data[i].ID + j, size, color, mode, 0, data[i].Time + (data[i].SubTick[j] * bpm[bpmIndex].SecPerTick), data[i].Tick + data[i].SubTick[j], data[i].Speed, data[i].SubPos[j] + 1, data[i].SubPos[j] + 1, new int[] { data[i].ID + j - 1 });
                         if (j.Equals(data[i].SubPos.Count - 1))
                         {
                             int newflick = 0;

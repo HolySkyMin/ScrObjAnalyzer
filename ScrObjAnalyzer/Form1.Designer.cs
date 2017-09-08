@@ -40,6 +40,7 @@
             this.ID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Track = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Tick = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.StartPos = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EndPos = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -55,7 +56,6 @@
             this.ColorB = new System.Windows.Forms.NumericUpDown();
             this.ColorG = new System.Windows.Forms.NumericUpDown();
             this.ColorR = new System.Windows.Forms.NumericUpDown();
-            this.Tick = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.ModePanel.SuspendLayout();
             this.ExportBox.SuspendLayout();
             this.ExpColorBox.SuspendLayout();
@@ -197,6 +197,12 @@
             this.Time.Text = "Time";
             this.Time.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Time.Width = 140;
+            // 
+            // Tick
+            // 
+            this.Tick.Text = "Tick";
+            this.Tick.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Tick.Width = 50;
             // 
             // Type
             // 
@@ -351,12 +357,6 @@
             0,
             0});
             // 
-            // Tick
-            // 
-            this.Tick.Text = "Tick";
-            this.Tick.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.Tick.Width = 50;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -369,7 +369,7 @@
             this.Controls.Add(this.ModePanel);
             this.MinimumSize = new System.Drawing.Size(900, 490);
             this.Name = "Form1";
-            this.Text = "ScrObjAnalyzer 1.2.1";
+            this.Text = "ScrObjAnalyzer 1.2.1a";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ModePanel.ResumeLayout(false);
             this.ModePanel.PerformLayout();
