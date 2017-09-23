@@ -41,9 +41,7 @@ There is no Large slide note.
 
 ### StartPos
 
-ranges from -1 to 2 in 2Mix/2Mix+ mode, -2 to 5 in 4Mix mode, and -3 to 8 in 6Mix/Million Mix mode.  
-Allows decimal number (maybe).  
-**UPDATE 170812** Start point -3 has been discovered in official 'Shooting Stars' beatmap.
+**UPDATE 09/24** Any number is possible I guess: There seems no limit. I'm writing this after I discovered that -2 is possible in 2Mix.
 
 ### EndPos
 
