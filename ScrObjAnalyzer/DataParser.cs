@@ -13,7 +13,7 @@ namespace ScrObjAnalyzer
             
         }
 
-        public string ParseToTWx(int twxMode, List<ListData> data, List<BPMData> bpm, byte[] color)
+        public string ParseToTWx(int twxMode, List<ListData> data, List<BPMData> bpm, byte[] color, Metadata meta)
         {
             List<Note> NoteList = new List<Note>();
             int bpmIndex = -1;
@@ -36,7 +36,7 @@ namespace ScrObjAnalyzer
                 double start = data[i].StartPos + 1;
 
                 Note note = new Note();
-                note.CreateNote(data[i].ID, size, color, mode, flick, data[i].Time, data[i].Tick, data[i].Speed, start, data[i].EndPos + 1.0, new int[] { 0 });
+                note.CreateNote(data[i].ID, size, data[i].NoteColor, mode, flick, data[i].Time, data[i].Tick, data[i].Speed, start, data[i].EndPos + 1.0, new int[] { 0 });
                 NoteList.Add(note);
                 if (data[i].Type.Equals(5) || data[i].Type.Equals(7))
                 {
@@ -46,7 +46,7 @@ namespace ScrObjAnalyzer
                     else if (data[i].EndType.Equals(2)) { newflick = 3; }
                     else if (data[i].EndType.Equals(3)) { newflick = 2; }
                     Note tail = new Note();
-                    tail.CreateNote(data[i].ID + 1, size, color, mode, newflick, data[i].Time + (data[i].TickDistance * bpm[bpmIndex].SecPerTick), data[i].Tick + data[i].TickDistance, data[i].Speed, start, data[i].EndPos + 1, new int[] { data[i].ID });
+                    tail.CreateNote(data[i].ID + 1, size, data[i].SubColor[0], mode, newflick, data[i].Time + (data[i].TickDistance * bpm[bpmIndex].SecPerTick), data[i].Tick + data[i].TickDistance, data[i].Speed, start, data[i].EndPos + 1, new int[] { data[i].ID });
                     NoteList.Add(tail);
                 }
                 else if (data[i].Type.Equals(6))
@@ -54,7 +54,7 @@ namespace ScrObjAnalyzer
                     for (int j = 1; j < data[i].SubPos.Count; j++)
                     {
                         Note sub = new Note();
-                        sub.CreateNote(data[i].ID + j, size, color, mode, 0, data[i].Time + (data[i].SubTick[j] * bpm[bpmIndex].SecPerTick), data[i].Tick + data[i].SubTick[j], data[i].Speed, data[i].SubPos[j] + 1, data[i].SubPos[j] + 1, new int[] { data[i].ID + j - 1 });
+                        sub.CreateNote(data[i].ID + j, size, data[i].SubColor[j - 1], mode, 0, data[i].Time + (data[i].SubTick[j] * bpm[bpmIndex].SecPerTick), data[i].Tick + data[i].SubTick[j], data[i].Speed, data[i].SubPos[j] + 1, data[i].SubPos[j] + 1, new int[] { data[i].ID + j - 1 });
                         if (j.Equals(data[i].SubPos.Count - 1))
                         {
                             int newflick = 0;
@@ -70,6 +70,7 @@ namespace ScrObjAnalyzer
             }
 
             NoteData notedata = new NoteData();
+            notedata.metadata = meta;
             notedata.notes = NoteList.ToArray();
 
             string json = JsonMapper.ToJson(notedata);
@@ -82,42 +83,14 @@ namespace ScrObjAnalyzer
 
             if (twxMode.Equals(2))
             {
-                /*
-                if (value.Equals(-1)) { start = 0.666666; }
-                else if (value.Equals(0)) { start = 1.222222; }
-                else if (value.Equals(1)) { start = 1.777777; }
-                else if (value.Equals(2)) { start = 2.333333; }
-                */
                 start = (11.0 / 9.0) + ((5.0 / 9.0) * value);
             }
             else if (twxMode.Equals(4))
             {
-                /*
-                if (value.Equals(-2)) { start = 0.555555; }
-                else if (value.Equals(-1)) { start = 1.111111; }
-                else if (value.Equals(0)) { start = 1.666666; }
-                else if (value.Equals(1)) { start = 2.222222; }
-                else if (value.Equals(2)) { start = 2.777777; }
-                else if (value.Equals(3)) { start = 3.333333; }
-                else if (value.Equals(4)) { start = 3.888888; }
-                else if (value.Equals(5)) { start = 4.444444; }
-                */
                 start = (15.0 / 9.0) + ((5.0 / 9.0) * value);
             }
             else if (twxMode.Equals(6))
             {
-                /*
-                if (value.Equals(-2)) { start = 1.0; }
-                else if (value.Equals(-1)) { start = 1.555555; }
-                else if (value.Equals(0)) { start = 2.111111; }
-                else if (value.Equals(1)) { start = 2.666666; }
-                else if (value.Equals(2)) { start = 3.222222; }
-                else if (value.Equals(3)) { start = 3.777777; }
-                else if (value.Equals(4)) { start = 4.333333; }
-                else if (value.Equals(5)) { start = 4.888888; }
-                else if (value.Equals(6)) { start = 5.444444; }
-                else if (value.Equals(7)) { start = 6.0; }
-                */
                 start = (19.0 / 9.0) + ((5.0 / 9.0) * value);
             }
 

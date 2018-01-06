@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.IO;
+using System.Drawing;
+using TempestWave.TWx;
 
 namespace ScrObjAnalyzer
 {
     public partial class Form1 : Form
     {
         public string OriginText;
+        public Color PaletteColor;
+        public ListData PickedData;
         public List<ListData> ListDatas = new List<ListData>(), CurrentDatas = new List<ListData>();
         public List<BPMData> BPMs = new List<BPMData>();
 
@@ -93,8 +97,13 @@ namespace ScrObjAnalyzer
                 {
                     int val = int.Parse(data[3]);
                     ListDatas[totalCount].Type = val;
+                    ListDatas[totalCount].NoteColor = new byte[4] { 255, 255, 255, 255 };
 
-                    if (val.Equals(5) || val.Equals(7)) { trackDic[ListDatas[totalCount].MyMix]++; }
+                    if (val.Equals(5) || val.Equals(7))
+                    {
+                        trackDic[ListDatas[totalCount].MyMix]++;
+                        ListDatas[totalCount].SubColor.Add(new byte[4] { 255, 255, 255, 255 });
+                    }
                 }
                 else if (data.Length > 2 && data[1].Equals("startPosx"))
                 {
@@ -126,7 +135,11 @@ namespace ScrObjAnalyzer
                     int val = int.Parse(data[3]);
                     ListDatas[totalCount].SubTick.Add(val);
 
-                    if(ListDatas[totalCount].SubTick.Count > 1) { trackDic[ListDatas[totalCount].MyMix]++; }
+                    if(ListDatas[totalCount].SubTick.Count > 1)
+                    {
+                        trackDic[ListDatas[totalCount].MyMix]++;
+                        ListDatas[totalCount].SubColor.Add(new byte[4] { 255, 255, 255, 255 });
+                    }
                 }
                 else if (data.Length > 2 && data[1].Equals("posx"))
                 {
@@ -141,6 +154,7 @@ namespace ScrObjAnalyzer
             }
 
             AddToList(ListDatas);
+            for (int i = 0; i < ListDatas.Count; i++) { CurrentDatas.Add(ListDatas[i]); }
         }
 
         private void FilterBtn_Click(object sender, EventArgs e)
@@ -190,6 +204,12 @@ namespace ScrObjAnalyzer
                 item.SubItems.Add(datas[i].Speed.ToString());
                 item.SubItems.Add(datas[i].EndType.ToString());
 
+                if(datas[i].MyMix >= 100)
+                {
+                    if (datas[i].Type.Equals(6)) { item.SubItems.Add("Slide note."); }
+                    else if (datas[i].Type.Equals(5) || datas[i].Type.Equals(7)) { item.SubItems.Add("Hold note."); }
+                }
+
                 TextList.Items.Add(item);
             }
         }
@@ -197,12 +217,157 @@ namespace ScrObjAnalyzer
         private void ReshowBtn_Click(object sender, EventArgs e)
         {
             AddToList(ListDatas);
+            for (int i = 0; i < ListDatas.Count; i++) { CurrentDatas.Add(ListDatas[i]); }
             ExportBtn.Enabled = false;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             OriginText = Text;
+            PaletteColor = System.Drawing.Color.FromArgb(255, 255, 255, 255);
+        }
+
+        private void TextList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SpecificNoteList.Items.Clear();
+            ColorApplyBtn.Enabled = false;
+
+            if (TextList.SelectedIndices.Count > 0)
+            {
+                ListData pickData = CurrentDatas[TextList.SelectedIndices[0]];
+                if (pickData.MyMix < 100)
+                {
+                    NoteOrNot.Text = "This is not a note.";
+                }
+                else
+                {
+                    if (pickData.Type.Equals(5) || pickData.Type.Equals(7))
+                    {
+                        NoteOrNot.Text = "Hold note selected. #" + pickData.ID.ToString();
+
+                        ListViewItem itemHead = new ListViewItem("Start");
+                        itemHead.SubItems.Add(pickData.EndPos.ToString());
+                        itemHead.SubItems.Add(pickData.NoteColor[0].ToString() + "," + pickData.NoteColor[1].ToString() + "," + pickData.NoteColor[2].ToString() + "," + pickData.NoteColor[3].ToString());
+                        SpecificNoteList.Items.Add(itemHead);
+
+                        ListViewItem itemTail = new ListViewItem("End");
+                        itemTail.SubItems.Add(pickData.EndPos.ToString());
+                        itemTail.SubItems.Add(pickData.SubColor[0][0].ToString() + "," + pickData.SubColor[0][1].ToString() + "," + pickData.SubColor[0][2].ToString() + "," + pickData.SubColor[0][3].ToString());
+                        SpecificNoteList.Items.Add(itemTail);
+                    }
+                    else if (pickData.Type.Equals(6))
+                    {
+                        NoteOrNot.Text = "Slide note selected. #" + pickData.ID.ToString();
+
+                        ListViewItem itemHead = new ListViewItem("Start");
+                        itemHead.SubItems.Add(pickData.EndPos.ToString());
+                        itemHead.SubItems.Add(pickData.NoteColor[0].ToString() + "," + pickData.NoteColor[1].ToString() + "," + pickData.NoteColor[2].ToString() + "," + pickData.NoteColor[3].ToString());
+                        SpecificNoteList.Items.Add(itemHead);
+
+                        for (int i = 1; i < pickData.SubPos.Count; i++)
+                        {
+                            ListViewItem itemCheck;
+                            if (i.Equals(pickData.SubPos.Count - 1)) { itemCheck = new ListViewItem("End"); }
+                            else { itemCheck = new ListViewItem("Check"); }
+                            itemCheck.SubItems.Add(pickData.SubPos[i].ToString());
+                            itemCheck.SubItems.Add(pickData.SubColor[i - 1][0].ToString() + "," + pickData.SubColor[i - 1][1].ToString() + "," + pickData.SubColor[i - 1][2].ToString() + "," + pickData.SubColor[i - 1][3].ToString());
+                            SpecificNoteList.Items.Add(itemCheck);
+                        }
+                    }
+                    else
+                    {
+                        ListViewItem itemHead = new ListViewItem("Start");
+                        itemHead.SubItems.Add(pickData.EndPos.ToString());
+                        itemHead.SubItems.Add(pickData.NoteColor[0].ToString() + "," + pickData.NoteColor[1].ToString() + "," + pickData.NoteColor[2].ToString() + "," + pickData.NoteColor[3].ToString());
+                        SpecificNoteList.Items.Add(itemHead);
+
+                        if (pickData.Type.Equals(2) || pickData.Type.Equals(3) || pickData.Type.Equals(4)) { NoteOrNot.Text = "Flick note selected. #" + pickData.ID.ToString(); }
+                        else { NoteOrNot.Text = "Tap note selected. #" + pickData.ID.ToString(); }
+                    }
+                    ColorApplyBtn.Enabled = true;
+                }
+                PickedData = pickData;
+            }
+        }
+
+        private void ReloadSpecificList()
+        {
+            SpecificNoteList.Items.Clear();
+
+            if (PickedData.Type.Equals(5) || PickedData.Type.Equals(7))
+            {
+                ListViewItem itemHead = new ListViewItem("Start");
+                itemHead.SubItems.Add(PickedData.EndPos.ToString());
+                itemHead.SubItems.Add(PickedData.NoteColor[0].ToString() + "," + PickedData.NoteColor[1].ToString() + "," + PickedData.NoteColor[2].ToString() + "," + PickedData.NoteColor[3].ToString());
+                SpecificNoteList.Items.Add(itemHead);
+
+                ListViewItem itemTail = new ListViewItem("End");
+                itemTail.SubItems.Add(PickedData.EndPos.ToString());
+                itemTail.SubItems.Add(PickedData.SubColor[0][0].ToString() + "," + PickedData.SubColor[0][1].ToString() + "," + PickedData.SubColor[0][2].ToString() + "," + PickedData.SubColor[0][3].ToString());
+                SpecificNoteList.Items.Add(itemTail);
+            }
+            else if (PickedData.Type.Equals(6))
+            {
+                ListViewItem itemHead = new ListViewItem("Start");
+                itemHead.SubItems.Add(PickedData.EndPos.ToString());
+                itemHead.SubItems.Add(PickedData.NoteColor[0].ToString() + "," + PickedData.NoteColor[1].ToString() + "," + PickedData.NoteColor[2].ToString() + "," + PickedData.NoteColor[3].ToString());
+                SpecificNoteList.Items.Add(itemHead);
+
+                for (int i = 1; i < PickedData.SubPos.Count; i++)
+                {
+                    ListViewItem itemCheck;
+                    if (i.Equals(PickedData.SubPos.Count - 1)) { itemCheck = new ListViewItem("End"); }
+                    else { itemCheck = new ListViewItem("Check"); }
+                    itemCheck.SubItems.Add(PickedData.SubPos[i].ToString());
+                    itemCheck.SubItems.Add(PickedData.SubColor[i - 1][0].ToString() + "," + PickedData.SubColor[i - 1][1].ToString() + "," + PickedData.SubColor[i - 1][2].ToString() + "," + PickedData.SubColor[i - 1][3].ToString());
+                    SpecificNoteList.Items.Add(itemCheck);
+                }
+            }
+            else
+            {
+                ListViewItem itemHead = new ListViewItem("Start");
+                itemHead.SubItems.Add(PickedData.EndPos.ToString());
+                itemHead.SubItems.Add(PickedData.NoteColor[0].ToString() + "," + PickedData.NoteColor[1].ToString() + "," + PickedData.NoteColor[2].ToString() + "," + PickedData.NoteColor[3].ToString());
+                SpecificNoteList.Items.Add(itemHead);
+            }
+        }
+
+        private void ColorApplyBtn_Click(object sender, EventArgs e)
+        {
+            if(ApplyAllCheck.Checked)
+            {
+                for(int i = 0; i < CurrentDatas.Count; i++)
+                {
+                    CurrentDatas[i].NoteColor = new byte[4] { PaletteColor.R, PaletteColor.G, PaletteColor.B, PaletteColor.A };
+                    if(CurrentDatas[i].SubColor.Count > 0)
+                    {
+                        for (int j = 0; j < CurrentDatas[i].SubColor.Count; j++) { CurrentDatas[i].SubColor[j] = new byte[4] { PaletteColor.R, PaletteColor.G, PaletteColor.B, PaletteColor.A }; }
+                    }
+                }
+                if (SpecificNoteList.Items.Count > 0) { ReloadSpecificList(); }
+            }
+            else
+            {
+                if (SpecificNoteList.SelectedIndices.Count > 0)
+                {
+                    if (SpecificNoteList.Items.Count > 1)
+                    {
+                        for (int i = 0; i < SpecificNoteList.SelectedIndices.Count; i++)
+                        {
+                            if (SpecificNoteList.SelectedIndices[i].Equals(0)) { PickedData.NoteColor = new byte[4] { PaletteColor.R, PaletteColor.G, PaletteColor.B, PaletteColor.A }; }
+                            else { PickedData.SubColor[SpecificNoteList.SelectedIndices[i] - 1] = new byte[4] { PaletteColor.R, PaletteColor.G, PaletteColor.B, PaletteColor.A }; }
+                        }
+                        ReloadSpecificList();
+                    }
+                    else { PickedData.NoteColor = new byte[4] { PaletteColor.R, PaletteColor.G, PaletteColor.B, PaletteColor.A }; }
+                }
+            }
+        }
+
+        private void ColorChanged(object sender, EventArgs e)
+        {
+            PaletteColor = System.Drawing.Color.FromArgb((byte)ColorA.Value, (byte)ColorR.Value, (byte)ColorG.Value, (byte)ColorB.Value);
+            Palette.BackColor = PaletteColor;
         }
 
         private void ExportBtn_Click(object sender, EventArgs e)
@@ -230,8 +395,18 @@ namespace ScrObjAnalyzer
             DialogResult res = ExportDialog.ShowDialog();
             if(res.Equals(DialogResult.OK))
             {
+                Metadata data = new Metadata();
+                if (EasyRadio.Checked) { data.level = 1; }
+                else if (NormalRadio.Checked) { data.level = 2; }
+                else if (HardRadio.Checked) { data.level = 3; }
+                else if (ApexRadio.Checked) { data.level = 4; }
+                else if (CustomRadio.Checked) { data.level = (int)CustomLevelVal.Value; }
+                data.artist = Artist.Text;
+                data.mapper = Mapper.Text;
+                data.density = (int)DensityVal.Value;
+
                 DataParser parser = new DataParser();
-                string jsonText = parser.ParseToTWx(curParseMode, CurrentDatas, BPMs, new byte[] { (byte)ColorR.Value, (byte)ColorG.Value, (byte)ColorB.Value, (byte)ColorA.Value });
+                string jsonText = parser.ParseToTWx(curParseMode, CurrentDatas, BPMs, new byte[] { (byte)ColorR.Value, (byte)ColorG.Value, (byte)ColorB.Value, (byte)ColorA.Value }, data);
 
                 StreamWriter writer = new StreamWriter(ExportDialog.OpenFile());
                 writer.Write(jsonText);
@@ -255,13 +430,17 @@ namespace ScrObjAnalyzer
         public double Speed { get; set; }
         public int TickDistance { get; set; }
         public int EndType { get; set; }
+        public byte[] NoteColor { get; set; }
         public List<double> SubPos { get; set; }
         public List<int> SubTick { get; set; }
+        public List<byte[]> SubColor { get; set; }
 
         public ListData()
         {
+            NoteColor = new byte[4] { 255, 255, 255, 255 };
             SubPos = new List<double>();
             SubTick = new List<int>();
+            SubColor = new List<byte[]>(4);
         }
     }
 

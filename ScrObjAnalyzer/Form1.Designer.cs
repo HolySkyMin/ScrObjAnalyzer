@@ -46,23 +46,52 @@
             this.EndPos = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.EndType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Description = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.OpenDialog = new System.Windows.Forms.OpenFileDialog();
             this.ReshowBtn = new System.Windows.Forms.Button();
             this.ExportBtn = new System.Windows.Forms.Button();
             this.ExportDialog = new System.Windows.Forms.SaveFileDialog();
             this.ExportBox = new System.Windows.Forms.GroupBox();
+            this.MetadataBox = new System.Windows.Forms.GroupBox();
+            this.DensityVal = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
+            this.LevelBox = new System.Windows.Forms.GroupBox();
+            this.CustomLevelVal = new System.Windows.Forms.NumericUpDown();
+            this.CustomRadio = new System.Windows.Forms.RadioButton();
+            this.ApexRadio = new System.Windows.Forms.RadioButton();
+            this.HardRadio = new System.Windows.Forms.RadioButton();
+            this.NormalRadio = new System.Windows.Forms.RadioButton();
+            this.EasyRadio = new System.Windows.Forms.RadioButton();
+            this.Mapper = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Artist = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.ExpColorBox = new System.Windows.Forms.GroupBox();
+            this.ApplyAllCheck = new System.Windows.Forms.CheckBox();
+            this.ColorApplyBtn = new System.Windows.Forms.Button();
+            this.Palette = new System.Windows.Forms.Panel();
             this.ColorA = new System.Windows.Forms.NumericUpDown();
             this.ColorB = new System.Windows.Forms.NumericUpDown();
             this.ColorG = new System.Windows.Forms.NumericUpDown();
             this.ColorR = new System.Windows.Forms.NumericUpDown();
+            this.SelectedTargetBox = new System.Windows.Forms.GroupBox();
+            this.SpecificNoteList = new System.Windows.Forms.ListView();
+            this.State = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.EndLine = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Color = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.NoteOrNot = new System.Windows.Forms.Label();
             this.ModePanel.SuspendLayout();
             this.ExportBox.SuspendLayout();
+            this.MetadataBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DensityVal)).BeginInit();
+            this.LevelBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CustomLevelVal)).BeginInit();
             this.ExpColorBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColorA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColorB)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColorG)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColorR)).BeginInit();
+            this.SelectedTargetBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ModePanel
@@ -74,7 +103,7 @@
             this.ModePanel.Controls.Add(this.Mix4);
             this.ModePanel.Controls.Add(this.MixM);
             this.ModePanel.Controls.Add(this.Mix6);
-            this.ModePanel.Location = new System.Drawing.Point(636, 120);
+            this.ModePanel.Location = new System.Drawing.Point(706, 116);
             this.ModePanel.Name = "ModePanel";
             this.ModePanel.Size = new System.Drawing.Size(236, 189);
             this.ModePanel.TabIndex = 1;
@@ -149,7 +178,7 @@
             // LoadBtn
             // 
             this.LoadBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoadBtn.Location = new System.Drawing.Point(636, 12);
+            this.LoadBtn.Location = new System.Drawing.Point(706, 12);
             this.LoadBtn.Name = "LoadBtn";
             this.LoadBtn.Size = new System.Drawing.Size(236, 46);
             this.LoadBtn.TabIndex = 5;
@@ -171,15 +200,19 @@
             this.StartPos,
             this.EndPos,
             this.Speed,
-            this.EndType});
+            this.EndType,
+            this.Description});
+            this.TextList.FullRowSelect = true;
             this.TextList.GridLines = true;
+            this.TextList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.TextList.Location = new System.Drawing.Point(12, 12);
             this.TextList.MultiSelect = false;
             this.TextList.Name = "TextList";
-            this.TextList.Size = new System.Drawing.Size(618, 427);
+            this.TextList.Size = new System.Drawing.Size(688, 787);
             this.TextList.TabIndex = 6;
             this.TextList.UseCompatibleStateImageBehavior = false;
             this.TextList.View = System.Windows.Forms.View.Details;
+            this.TextList.SelectedIndexChanged += new System.EventHandler(this.TextList_SelectedIndexChanged);
             // 
             // ID
             // 
@@ -228,7 +261,13 @@
             // 
             this.EndType.Text = "EndType";
             this.EndType.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.EndType.Width = 70;
+            this.EndType.Width = 65;
+            // 
+            // Description
+            // 
+            this.Description.Text = "Description";
+            this.Description.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Description.Width = 79;
             // 
             // OpenDialog
             // 
@@ -240,7 +279,7 @@
             // 
             this.ReshowBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ReshowBtn.Enabled = false;
-            this.ReshowBtn.Location = new System.Drawing.Point(636, 65);
+            this.ReshowBtn.Location = new System.Drawing.Point(706, 64);
             this.ReshowBtn.Name = "ReshowBtn";
             this.ReshowBtn.Size = new System.Drawing.Size(236, 46);
             this.ReshowBtn.TabIndex = 5;
@@ -252,7 +291,7 @@
             // 
             this.ExportBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ExportBtn.Enabled = false;
-            this.ExportBtn.Location = new System.Drawing.Point(6, 74);
+            this.ExportBtn.Location = new System.Drawing.Point(6, 224);
             this.ExportBtn.Name = "ExportBtn";
             this.ExportBtn.Size = new System.Drawing.Size(224, 46);
             this.ExportBtn.TabIndex = 7;
@@ -267,30 +306,210 @@
             // ExportBox
             // 
             this.ExportBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ExportBox.Controls.Add(this.ExpColorBox);
+            this.ExportBox.Controls.Add(this.MetadataBox);
             this.ExportBox.Controls.Add(this.ExportBtn);
-            this.ExportBox.Location = new System.Drawing.Point(636, 315);
+            this.ExportBox.Location = new System.Drawing.Point(706, 528);
             this.ExportBox.Name = "ExportBox";
-            this.ExportBox.Size = new System.Drawing.Size(236, 126);
+            this.ExportBox.Size = new System.Drawing.Size(236, 276);
             this.ExportBox.TabIndex = 8;
             this.ExportBox.TabStop = false;
             this.ExportBox.Text = "Export setting";
             // 
+            // MetadataBox
+            // 
+            this.MetadataBox.Controls.Add(this.DensityVal);
+            this.MetadataBox.Controls.Add(this.label3);
+            this.MetadataBox.Controls.Add(this.LevelBox);
+            this.MetadataBox.Controls.Add(this.Mapper);
+            this.MetadataBox.Controls.Add(this.label2);
+            this.MetadataBox.Controls.Add(this.Artist);
+            this.MetadataBox.Controls.Add(this.label1);
+            this.MetadataBox.Location = new System.Drawing.Point(6, 20);
+            this.MetadataBox.Name = "MetadataBox";
+            this.MetadataBox.Size = new System.Drawing.Size(224, 197);
+            this.MetadataBox.TabIndex = 8;
+            this.MetadataBox.TabStop = false;
+            this.MetadataBox.Text = "Metadata";
+            // 
+            // DensityVal
+            // 
+            this.DensityVal.Location = new System.Drawing.Point(127, 170);
+            this.DensityVal.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.DensityVal.Name = "DensityVal";
+            this.DensityVal.Size = new System.Drawing.Size(84, 21);
+            this.DensityVal.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 172);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(108, 12);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Density (Difficulty)";
+            // 
+            // LevelBox
+            // 
+            this.LevelBox.Controls.Add(this.CustomLevelVal);
+            this.LevelBox.Controls.Add(this.CustomRadio);
+            this.LevelBox.Controls.Add(this.ApexRadio);
+            this.LevelBox.Controls.Add(this.HardRadio);
+            this.LevelBox.Controls.Add(this.NormalRadio);
+            this.LevelBox.Controls.Add(this.EasyRadio);
+            this.LevelBox.Location = new System.Drawing.Point(6, 72);
+            this.LevelBox.Name = "LevelBox";
+            this.LevelBox.Size = new System.Drawing.Size(211, 92);
+            this.LevelBox.TabIndex = 4;
+            this.LevelBox.TabStop = false;
+            this.LevelBox.Text = "Level";
+            // 
+            // CustomLevelVal
+            // 
+            this.CustomLevelVal.Location = new System.Drawing.Point(121, 64);
+            this.CustomLevelVal.Name = "CustomLevelVal";
+            this.CustomLevelVal.Size = new System.Drawing.Size(84, 21);
+            this.CustomLevelVal.TabIndex = 5;
+            // 
+            // CustomRadio
+            // 
+            this.CustomRadio.AutoSize = true;
+            this.CustomRadio.Location = new System.Drawing.Point(6, 64);
+            this.CustomRadio.Name = "CustomRadio";
+            this.CustomRadio.Size = new System.Drawing.Size(67, 16);
+            this.CustomRadio.TabIndex = 4;
+            this.CustomRadio.TabStop = true;
+            this.CustomRadio.Text = "Custom";
+            this.CustomRadio.UseVisualStyleBackColor = true;
+            // 
+            // ApexRadio
+            // 
+            this.ApexRadio.AutoSize = true;
+            this.ApexRadio.Location = new System.Drawing.Point(121, 42);
+            this.ApexRadio.Name = "ApexRadio";
+            this.ApexRadio.Size = new System.Drawing.Size(72, 16);
+            this.ApexRadio.TabIndex = 3;
+            this.ApexRadio.TabStop = true;
+            this.ApexRadio.Text = "Apex (4)";
+            this.ApexRadio.UseVisualStyleBackColor = true;
+            // 
+            // HardRadio
+            // 
+            this.HardRadio.AutoSize = true;
+            this.HardRadio.Location = new System.Drawing.Point(6, 42);
+            this.HardRadio.Name = "HardRadio";
+            this.HardRadio.Size = new System.Drawing.Size(69, 16);
+            this.HardRadio.TabIndex = 2;
+            this.HardRadio.TabStop = true;
+            this.HardRadio.Text = "Hard (3)";
+            this.HardRadio.UseVisualStyleBackColor = true;
+            // 
+            // NormalRadio
+            // 
+            this.NormalRadio.AutoSize = true;
+            this.NormalRadio.Location = new System.Drawing.Point(121, 20);
+            this.NormalRadio.Name = "NormalRadio";
+            this.NormalRadio.Size = new System.Drawing.Size(84, 16);
+            this.NormalRadio.TabIndex = 1;
+            this.NormalRadio.TabStop = true;
+            this.NormalRadio.Text = "Normal (2)";
+            this.NormalRadio.UseVisualStyleBackColor = true;
+            // 
+            // EasyRadio
+            // 
+            this.EasyRadio.AutoSize = true;
+            this.EasyRadio.Location = new System.Drawing.Point(6, 20);
+            this.EasyRadio.Name = "EasyRadio";
+            this.EasyRadio.Size = new System.Drawing.Size(72, 16);
+            this.EasyRadio.TabIndex = 0;
+            this.EasyRadio.TabStop = true;
+            this.EasyRadio.Text = "Easy (1)";
+            this.EasyRadio.UseVisualStyleBackColor = true;
+            // 
+            // Mapper
+            // 
+            this.Mapper.Location = new System.Drawing.Point(60, 45);
+            this.Mapper.Name = "Mapper";
+            this.Mapper.Size = new System.Drawing.Size(157, 21);
+            this.Mapper.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(6, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(48, 12);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Mapper";
+            // 
+            // Artist
+            // 
+            this.Artist.Location = new System.Drawing.Point(60, 18);
+            this.Artist.Name = "Artist";
+            this.Artist.Size = new System.Drawing.Size(157, 21);
+            this.Artist.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(33, 12);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Artist";
+            // 
             // ExpColorBox
             // 
+            this.ExpColorBox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.ExpColorBox.Controls.Add(this.ApplyAllCheck);
+            this.ExpColorBox.Controls.Add(this.ColorApplyBtn);
+            this.ExpColorBox.Controls.Add(this.Palette);
             this.ExpColorBox.Controls.Add(this.ColorA);
             this.ExpColorBox.Controls.Add(this.ColorB);
             this.ExpColorBox.Controls.Add(this.ColorG);
             this.ExpColorBox.Controls.Add(this.ColorR);
-            this.ExpColorBox.Location = new System.Drawing.Point(7, 21);
+            this.ExpColorBox.Location = new System.Drawing.Point(7, 126);
             this.ExpColorBox.Name = "ExpColorBox";
-            this.ExpColorBox.Size = new System.Drawing.Size(223, 47);
+            this.ExpColorBox.Size = new System.Drawing.Size(225, 79);
             this.ExpColorBox.TabIndex = 8;
             this.ExpColorBox.TabStop = false;
-            this.ExpColorBox.Text = "Color (R, G, B, A)";
+            this.ExpColorBox.Text = "Set color (R, G, B, A)";
+            // 
+            // ApplyAllCheck
+            // 
+            this.ApplyAllCheck.AutoSize = true;
+            this.ApplyAllCheck.Location = new System.Drawing.Point(90, 53);
+            this.ApplyAllCheck.Name = "ApplyAllCheck";
+            this.ApplyAllCheck.Size = new System.Drawing.Size(73, 16);
+            this.ApplyAllCheck.TabIndex = 14;
+            this.ApplyAllCheck.Text = "All notes";
+            this.ApplyAllCheck.UseVisualStyleBackColor = true;
+            // 
+            // ColorApplyBtn
+            // 
+            this.ColorApplyBtn.Location = new System.Drawing.Point(169, 48);
+            this.ColorApplyBtn.Name = "ColorApplyBtn";
+            this.ColorApplyBtn.Size = new System.Drawing.Size(48, 25);
+            this.ColorApplyBtn.TabIndex = 13;
+            this.ColorApplyBtn.Text = "Apply";
+            this.ColorApplyBtn.UseVisualStyleBackColor = true;
+            this.ColorApplyBtn.Click += new System.EventHandler(this.ColorApplyBtn_Click);
+            // 
+            // Palette
+            // 
+            this.Palette.BackColor = System.Drawing.Color.White;
+            this.Palette.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Palette.Location = new System.Drawing.Point(7, 48);
+            this.Palette.Name = "Palette";
+            this.Palette.Size = new System.Drawing.Size(73, 25);
+            this.Palette.TabIndex = 12;
             // 
             // ColorA
             // 
+            this.ColorA.BackColor = System.Drawing.SystemColors.Window;
             this.ColorA.Location = new System.Drawing.Point(169, 20);
             this.ColorA.Maximum = new decimal(new int[] {
             255,
@@ -305,6 +524,7 @@
             0,
             0,
             0});
+            this.ColorA.ValueChanged += new System.EventHandler(this.ColorChanged);
             // 
             // ColorB
             // 
@@ -322,6 +542,7 @@
             0,
             0,
             0});
+            this.ColorB.ValueChanged += new System.EventHandler(this.ColorChanged);
             // 
             // ColorG
             // 
@@ -339,6 +560,7 @@
             0,
             0,
             0});
+            this.ColorG.ValueChanged += new System.EventHandler(this.ColorChanged);
             // 
             // ColorR
             // 
@@ -356,29 +578,95 @@
             0,
             0,
             0});
+            this.ColorR.ValueChanged += new System.EventHandler(this.ColorChanged);
+            // 
+            // SelectedTargetBox
+            // 
+            this.SelectedTargetBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SelectedTargetBox.Controls.Add(this.SpecificNoteList);
+            this.SelectedTargetBox.Controls.Add(this.NoteOrNot);
+            this.SelectedTargetBox.Controls.Add(this.ExpColorBox);
+            this.SelectedTargetBox.Location = new System.Drawing.Point(706, 311);
+            this.SelectedTargetBox.Name = "SelectedTargetBox";
+            this.SelectedTargetBox.Size = new System.Drawing.Size(238, 211);
+            this.SelectedTargetBox.TabIndex = 9;
+            this.SelectedTargetBox.TabStop = false;
+            this.SelectedTargetBox.Text = "Selected item";
+            // 
+            // SpecificNoteList
+            // 
+            this.SpecificNoteList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.State,
+            this.EndLine,
+            this.Color});
+            this.SpecificNoteList.FullRowSelect = true;
+            this.SpecificNoteList.GridLines = true;
+            this.SpecificNoteList.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.SpecificNoteList.Location = new System.Drawing.Point(6, 32);
+            this.SpecificNoteList.Name = "SpecificNoteList";
+            this.SpecificNoteList.Size = new System.Drawing.Size(224, 88);
+            this.SpecificNoteList.TabIndex = 10;
+            this.SpecificNoteList.UseCompatibleStateImageBehavior = false;
+            this.SpecificNoteList.View = System.Windows.Forms.View.Details;
+            // 
+            // State
+            // 
+            this.State.Text = "State";
+            this.State.Width = 50;
+            // 
+            // EndLine
+            // 
+            this.EndLine.Text = "End";
+            this.EndLine.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.EndLine.Width = 40;
+            // 
+            // Color
+            // 
+            this.Color.Text = "Color";
+            this.Color.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.Color.Width = 110;
+            // 
+            // NoteOrNot
+            // 
+            this.NoteOrNot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.NoteOrNot.Location = new System.Drawing.Point(84, 17);
+            this.NoteOrNot.Name = "NoteOrNot";
+            this.NoteOrNot.Size = new System.Drawing.Size(148, 12);
+            this.NoteOrNot.TabIndex = 9;
+            this.NoteOrNot.Text = "Nothing selected.";
+            this.NoteOrNot.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 451);
+            this.ClientSize = new System.Drawing.Size(954, 811);
+            this.Controls.Add(this.SelectedTargetBox);
             this.Controls.Add(this.ExportBox);
             this.Controls.Add(this.ReshowBtn);
             this.Controls.Add(this.TextList);
             this.Controls.Add(this.LoadBtn);
             this.Controls.Add(this.ModePanel);
-            this.MinimumSize = new System.Drawing.Size(900, 490);
+            this.MinimumSize = new System.Drawing.Size(970, 850);
             this.Name = "Form1";
-            this.Text = "ScrObjAnalyzer 1.2.1a";
+            this.Text = "ScrObjAnalyzer 1.3";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ModePanel.ResumeLayout(false);
             this.ModePanel.PerformLayout();
             this.ExportBox.ResumeLayout(false);
+            this.MetadataBox.ResumeLayout(false);
+            this.MetadataBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DensityVal)).EndInit();
+            this.LevelBox.ResumeLayout(false);
+            this.LevelBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CustomLevelVal)).EndInit();
             this.ExpColorBox.ResumeLayout(false);
+            this.ExpColorBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ColorA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColorB)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColorG)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColorR)).EndInit();
+            this.SelectedTargetBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -412,6 +700,30 @@
         private System.Windows.Forms.NumericUpDown ColorG;
         private System.Windows.Forms.NumericUpDown ColorR;
         private System.Windows.Forms.ColumnHeader Tick;
+        private System.Windows.Forms.ColumnHeader Description;
+        private System.Windows.Forms.GroupBox MetadataBox;
+        private System.Windows.Forms.NumericUpDown DensityVal;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.GroupBox LevelBox;
+        private System.Windows.Forms.NumericUpDown CustomLevelVal;
+        private System.Windows.Forms.RadioButton CustomRadio;
+        private System.Windows.Forms.RadioButton ApexRadio;
+        private System.Windows.Forms.RadioButton HardRadio;
+        private System.Windows.Forms.RadioButton NormalRadio;
+        private System.Windows.Forms.RadioButton EasyRadio;
+        private System.Windows.Forms.TextBox Mapper;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox Artist;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button ColorApplyBtn;
+        private System.Windows.Forms.Panel Palette;
+        private System.Windows.Forms.GroupBox SelectedTargetBox;
+        private System.Windows.Forms.ListView SpecificNoteList;
+        private System.Windows.Forms.ColumnHeader State;
+        private System.Windows.Forms.ColumnHeader EndLine;
+        private System.Windows.Forms.ColumnHeader Color;
+        private System.Windows.Forms.Label NoteOrNot;
+        private System.Windows.Forms.CheckBox ApplyAllCheck;
     }
 }
 

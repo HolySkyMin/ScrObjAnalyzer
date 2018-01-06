@@ -3,11 +3,12 @@
     public class NoteData
     {
         public int version { get; }
+        public Metadata metadata { get; set; }
         public Note[] notes { get; set; }
 
         public NoteData()
         {
-            version = 1;
+            version = 2;
         }
     }
 
@@ -43,12 +44,25 @@
             Color = color;
             Mode = mode;
             Flick = flick;
-            Time = time;
+            Time = (float)time;
             Tick = tick;
             Speed = speed;
             StartLine = start;
             EndLine = end;
             PrevIDs = prev;
+        }
+    }
+
+    public class Metadata
+    {
+        public int level { get; set; }
+        public string artist { get; set; }
+        public string mapper { get; set; }
+        public int density { get; set; }
+
+        public Metadata()
+        {
+
         }
     }
 }
