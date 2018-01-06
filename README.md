@@ -7,9 +7,10 @@ This program is not perfect still. I'm trying hard but there are possibilities o
 
 This program supports exploring \*\*\*\*\*\*\_fumen\_sobj.txt (which is originally JavaScript file I think) and exporting its core feature in TWx format.  
 2Mix and 2Mix+ will be exported as TW2, 4Mix will be exported as TW4, 6Mix and Million Mix will be exported as TW6.  
-(Tempest Wave will support TW2 and TW4 in their later update.)
 
 Exported beatmap is **95% same** compare to original MLTD; because there may be other system notes which control whole speed/scroll in scenario\_(...)\_sobj file.
+
+And you can set beautiful colors to the exported beatmap.
 
 ## Data rules
 
@@ -41,7 +42,7 @@ There is no Large slide note.
 
 ### StartPos
 
-**UPDATE 09/24** Any number is possible I guess: There seems no limit. I'm writing this after I discovered that -2 is possible in 2Mix.
+Any number is possible.
 
 ### EndPos
 
